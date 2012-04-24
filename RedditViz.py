@@ -56,7 +56,9 @@ class RedditViz(object):
     
     #EX: http://localhost:5050/search?query=NSFL&limit=1
     @cherrypy.expose
-    def search(self, query, subreddit=None, sort=None, limit=10):
+    def search(self, query=None, subreddit=None, sort=None, limit=10):
+        if query is None:
+            raise HTTPError(status=500, message="Missing query parameter")
         submissions = list(self.api.search(query, subreddit, sort, int(limit)))
         submissions_json = map(self.jsonify_submission, submissions)
         cherrypy.response.headers['Content-Type'] = 'application/json'
@@ -65,6 +67,8 @@ class RedditViz(object):
     #EX: http://localhost:5050/comments?num=2&submission_id=gws7c 
     @cherrypy.expose
     def comments(self, url=None, submission_id=None, num=5):
+        if url is None and submission_id is None:
+            raise HTTPError(status="500", message="Either url or submission_id parameter must be supplied")
         submission = ''
         if url is not None:
             submission = self.api.get_submission(url=url)
@@ -78,7 +82,9 @@ class RedditViz(object):
     
     #EX: http://localhost:5050/hot?subreddit=uiuc&num=5
     @cherrypy.expose
-    def hot(self, subreddit, num=10):
+    def hot(self, subreddit=None, num=10):
+        if subreddit is None:
+            raise HTTPError(status=500, message="Missing subreddit parameter")
         submissions = list(self.api.get_subreddit(subreddit).get_hot(int(num)))
         submissions_json = map(self.jsonify_submission, submissions)
         cherrypy.response.headers['Content-Type'] = 'application/json'
@@ -86,7 +92,9 @@ class RedditViz(object):
     
     #EX: http://localhost:5050/top?subreddit=uiuc&num=5
     @cherrypy.expose
-    def top(self, subreddit, num=10):
+    def top(self, subreddit=None, num=10):
+        if subreddit is None:
+            raise HTTPError(status=500, message="Missing subreddit parameter")
         submissions = list(self.api.get_subreddit(subreddit).get_top(int(num)))
         submissions_json = map(self.jsonify_submission, submissions)
         cherrypy.response.headers['Content-Type'] = 'application/json'
@@ -94,13 +102,17 @@ class RedditViz(object):
     
     #EX: http://localhost:5050/subreddit?subreddit=uiuc
     @cherrypy.expose
-    def subreddit(self, subreddit):
+    def subreddit(self, subreddit=None):
+        if subreddit is None:
+            raise HTTPError(status=500, message="Missing subreddit parameter")
         cherrypy.response.headers['Content-Type'] = 'application/json'
         return json.dumps(self.api.get_subreddit(subreddit)._get_json_dict())
     
     #EX: http://localhost:5050/login?username=cemeyer2&password=notMyRealPassword
     @cherrypy.expose
     def login(self, username=None, password=None):
+        if username is None or password is None:
+            raise HTTPError(status=500, message="Missing username and/or password parameter(s)")
         result = True
         try:
             self.api.login(username, password)
@@ -110,7 +122,9 @@ class RedditViz(object):
         return json.dumps({'result':result})
     
     @cherrypy.expose
-    def upvote_submission(self, id):
+    def upvote_submission(self, id=None):
+        if id is None:
+            raise HTTPError(status=500, message="Missing id parameter")
         result = True
         try:
             self.api.get_submission(submission_id=id).upvote()
@@ -120,7 +134,9 @@ class RedditViz(object):
         return json.dumps({'result':result})
 
     @cherrypy.expose
-    def downvote_submission(self, id):
+    def downvote_submission(self, id=None):
+        if id is None:
+            raise HTTPError(status=500, message="Missing id parameter")
         result = True
         try:
             self.api.get_submission(submission_id=id).downvote()
@@ -130,7 +146,9 @@ class RedditViz(object):
         return json.dumps({'result':result}) 
     
     @cherrypy.expose
-    def clear_vote_submission(self, id):
+    def clear_vote_submission(self, id=None):
+        if id is None:
+            raise HTTPError(status=500, message="Missing id parameter")
         result = True
         try:
             self.api.get_submission(submission_id=id).clear_vote()
@@ -140,7 +158,9 @@ class RedditViz(object):
         return json.dumps({'result':result})
     
     @cherrypy.expose
-    def subreddit_search(self, query):
+    def subreddit_search(self, query=None):
+        if query is None:
+            raise HTTPError(status=500, message="Missing query parameter")
         cherrypy.response.headers['Content-Type'] = 'application/json'
         return json.dumps(map(reddit.objects.Subreddit._get_json_dict, self.api.search_reddit_names('NS')))  
     
