@@ -1,0 +1,79 @@
+.graphPopup
+{
+    position:absolute;
+    left:0;
+    top:0;
+    display:none;
+    z-index: 20000;
+    text-align: justify;
+    margin: 5px;
+    margin-right: 15px;
+}
+
+.graphPopupContent
+{
+    background-color: #FFF;
+    min-width: 175px;
+    min-height: 50px;
+}
+
+.nodePopup .corner, .edgePopup .corner
+{
+    width: 19px;
+    height: 15px;
+}
+
+.nodePopup .topLeft, .edgePopup .topLeft
+{
+    background: url(/images/popup/balloon_topLeft.png) no-repeat;
+}
+
+.nodePopup .bottomLeft, .edgePopup .bottomLeft
+{
+    background: url(/images/popup/balloon_bottomLeft.png) no-repeat;
+}
+
+.nodePopup .left, .edgePopup .left
+{
+    background: url(/images/popup/balloon_left.png) repeat-y;
+}
+
+.nodePopup .right, .edgePopup .right
+{
+    background: url(/images/popup/balloon_right.png) repeat-y;
+}
+
+.nodePopup .topRight, .edgePopup .topRight
+{
+    background: url(/images/popup/balloon_topRight.png) no-repeat;
+}
+
+.nodePopup .bottomRight, .edgePopup .bottomRight
+{
+    background: url(/images/popup/balloon_bottomRight.png) no-repeat;
+}
+
+.nodePopup .top, .edgePopup .top
+{
+    background: url(/images/popup/balloon_top.png) repeat-x;
+}
+
+.nodePopup .bottom, .edgePopup .bottom
+{
+    background: url(/images/popup/balloon_bottom.png) repeat-x;
+}
+
+.titleColumn {
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+.closeButton {
+    color: #778899;
+    float: right;
+    padding: 5px;
+    cursor: pointer;
+}
+.closeButton:hover {
+    color: #708090;
+}

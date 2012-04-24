@@ -1,8 +1,197 @@
-<html>
-	<head>
-		<title>RedditViz</title>
-	</head>
-	<body>
-		<h1>Index</h1>
-	</body>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+        <title>VulgarNet</title>
+
+        <!-- CSS Files -->
+        <link type="text/css" href="css/viz.css" rel="stylesheet"/>
+        <link type="text/css" href="css/progressPopup.css" rel="stylesheet"/>
+        <link type="text/css" href="css/graph.css" rel="stylesheet"/>
+        <link type="text/css" href="css/graphPopup.css" rel="stylesheet"/>
+        <link type="text/css" href="css/controls.css" rel="stylesheet"/>
+
+        <!-- Jquery & d3 includes -->
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="http://mbostock.github.com/d3/d3.js"></script>
+        <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet"/>
+       
+        <!-- Viz scripts -->
+        <script type="text/javascript" src="scripts/controls.js"></script>
+        <script type="text/javascript" src="scripts/graph.js"></script>
+        <script type="text/javascript" src="scripts/initialize.js"></script>
+
+        <!-- Handles UI effects -->
+        <script type="text/javascript" src="scripts/ui/login.js"></script>
+        <script type="text/javascript" src="scripts/ui/load.js"></script>
+        <script type="text/javascript" src="scripts/ui/graph.js"></script>
+    </head>
+
+    <body>
+        <div id="header">
+            <div id="logo">
+                <h1><a href="#">VulgarNet</a></h1>
+            </div>
+        </div>
+
+
+        <div id="wrapper">
+            <div class="btm">
+                <div id="page">
+
+                    <table width="100%" cellpadding="0">
+                        <tr>
+                            <td id="left-sidebar">
+                                <h3 class="title">Left sidebar</h3><br/>
+                                <div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div id="content">
+                                    <div class='gallery' id='chart' oncontextmenu="return false;"></div>
+                                </div>
+                            </td>
+
+                            <td id="right-sidebar">
+                                <h3 class="title">Controls</h3><br/>
+
+                                <div id='legend'>
+                                    <h3 class="title">Legend</h3><br/>
+                                    <div class='post'></div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+
+                </div>
+                <!-- end #page -->
+            </div>
+        </div>
+
+        <!-- The popup to display for loading a class -->
+        <div id="loadingPopup">
+            <div class="post">
+                <h3 class="title">Loading</h3><br/>
+                <div class="entry">
+                    <center>
+                        <div id="loadingStatusBox">
+                            <table>
+                                <tr>
+                                    <td><img src="/images/busy.gif"/></td>
+                                    <td id="loadingStatus"></td>
+                                </tr>
+                            </table>
+                            <br/>
+                        </div>
+                        <div id="loadingErrorBox"><div id="loadingError"></div><br/></div>
+                    </center>
+                </div>
+                <input type=button id="okButton" value="Ok" onclick="hideLoadingPopup();"/>
+            </div>
+        </div>
+
+        <!-- The popup to display for displaying progress, hidden by default -->
+        <div id="loginPopup">
+            <div class="post">
+                <h3 class="title">Please Login</h3><br/>
+                <div class="entry">
+                    <form id="realLoginForm">
+                        <table id="loginForm">
+                            <tr>
+                                <td>Netid:</td>
+                                <td><input type=text id="netIdBox" /></td>
+                            </tr>
+                            <tr>
+                                <td>Password:</td>
+                                <td><input type=password id="passwordBox" /></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div id="loginStatusBox">
+                    <center>
+                    <table>
+                        <tr>
+                            <td><img src="/images/busy.gif"/></td>
+                            <td id="loginStatus"></td>
+                        </tr>
+                    </table>
+                    <br/>
+                    </center>
+                </div>
+                <div id="loginErrorBox"><div id="loginError"></div><br/></div>
+                <input type=button id="loginButton" value="Login" onclick="submitLogin();"/>
+            </div>
+        </div>
+        <div id="backgroundPopup"></div>
+
+        <!-- Popup for a node -->
+        <div id="nodePopup" class="graphPopup">
+            <table border="0" cellspacing="0" cellpadding="0" align="center" class="nodePopup">
+                <tr>
+                    <td class="corner topLeft"></td>
+                    <td class="top"></td>
+                    <td class="corner topRight"></td>
+                </tr>
+                <tr>
+                    <td class="left">&nbsp;</td>
+                    <td>
+                        <div id="nodePopupContent" class="graphPopupContent"></div>
+                    </td>
+                    <td class="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="corner bottomLeft">&nbsp;</td>
+                    <td class="bottom">&nbsp;</td>
+                    <td class="corner bottomRight"></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- Popup for a edge -->
+        <div id="edgePopup" class="graphPopup">
+            <table border="0" cellspacing="0" cellpadding="0" align="center" class="edgePopup">
+                <tr>
+                    <td class="corner topLeft"></td>
+                    <td class="top"></td>
+                    <td class="corner topRight"></td>
+                </tr>
+                <tr>
+                    <td class="left">&nbsp;</td>
+                    <td>
+                        <div id="edgePopupContent" class="graphPopupContent"></div>
+                    </td>
+                    <td class="right">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td class="corner bottomLeft">&nbsp;</td>
+                    <td class="bottom">&nbsp;</td>
+                    <td class="corner bottomRight"></td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- The CoMoTo Footer -->
+        <div id="footer">
+            
+        </div>
+
+    </body>
+    <script>
+        showLoginPopup();
+
+        // Submit the login form on enter key pressed
+        $("#loginPopup").keyup(function(event){
+            if(event.keyCode == 13){
+                $("#loginButton").click();
+            }
+        });
+
+        initializeControls();
+
+    </script>
 </html>
