@@ -32,7 +32,7 @@ function submitLogin() {
             if (errorData.status == 401 || errorData.status == 403 || errorData.status == 405 || errorData.status == 407) {
                 message = "Authorization Error";
             } else if (errorData.status >= 500) {
-                message = "Internal Server Error"
+                message = errorData.statusText
             } else {
                 message = errorData.status + " '" + errorData.statusText + "'"
             }

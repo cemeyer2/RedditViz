@@ -113,6 +113,8 @@ class RedditViz(object):
     def login(self, username=None, password=None):
         if username is None or password is None:
             raise HTTPError(status=500, message="Missing username and/or password parameter(s)")
+        if len(username) == 0 or len(password) == 0:
+            raise HTTPError(status=500, message="Missing username and/or password parameter(s)")
         result = True
         try:
             self.api.login(username, password)
