@@ -44,9 +44,6 @@ class RedditViz(object):
         time.sleep(2)
         d['subreddit'] = submission.subreddit._get_json_dict()
         d['num_comments'] = submission.num_comments
-#        time.sleep(2)
-#        comments = submission.all_comments
-#        d['comments'] = map(self.jsonify_comment, comments[0:num_comments])
         d['over_18'] = submission.over_18
         d['score'] = submission.score
         d['permalink'] = submission.permalink
@@ -61,6 +58,19 @@ class RedditViz(object):
         submissions_json = map(self.jsonify_submission, submissions)
         cherrypy.response.headers['Content-Type'] = 'application/json'
         return json.dumps(submissions_json)
+    
+    @cherrypy.expose
+    def comments(self, url=None, submission_id=None, num=5):
+        submission = ''
+        if url is not None:
+            submission = self.api.get_submission(url=url)
+        elif submission_id is not None:
+            submission = self.api.get_submission(submission_id=submission_id)
+        else:
+            return json.dumps({})
+        comments = submission.all_comments
+        cherrypy.response.headers['Content-Type'] = 'application/json'
+        return json.dumps(map(self.jsonify_comment, comments[0:int(num)]))
 
 # Server configuration
 SCRIPTS_DIR = os.path.join(os.path.abspath("."), u"scripts")
