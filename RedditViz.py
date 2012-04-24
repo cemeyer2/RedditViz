@@ -52,6 +52,7 @@ class RedditViz(object):
         d['text_html'] = submission.selftext_html
         return d
     
+    #EX: http://localhost:5050/search?query=NSFL&limit=1
     @cherrypy.expose
     def search(self, query, subreddit=None, sort=None, limit=10):
         submissions = list(self.api.search(query, subreddit, sort, int(limit)))
@@ -59,6 +60,7 @@ class RedditViz(object):
         cherrypy.response.headers['Content-Type'] = 'application/json'
         return json.dumps(submissions_json)
     
+    #EX: http://localhost:5050/comments?num=2&submission_id=gws7c 
     @cherrypy.expose
     def comments(self, url=None, submission_id=None, num=5):
         submission = ''
