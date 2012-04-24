@@ -25,6 +25,7 @@ class RedditViz(object):
         d['body'] = comment.body
         d['body_html'] = comment.body_html
         d['created'] = comment.created
+        d['created_utc'] = comment.created_utc
         d['id'] = comment.id
         d['is_root'] = comment.is_root
         d['downs'] = comment.downs
@@ -38,6 +39,7 @@ class RedditViz(object):
         d = {}
         d['author'] = submission.author._get_json_dict()
         d['created'] = submission.created
+        d['created_utc'] = submission.created_utc
         d['downs'] = submission.downs
         d['ups'] = submission.ups
         d['title'] = submission.title
@@ -104,6 +106,7 @@ class RedditViz(object):
             self.api.login(username, password)
         except:
             result = False
+        cherrypy.response.headers['Content-Type'] = 'application/json'
         return json.dumps({'result':result})
     
     @cherrypy.expose
@@ -113,6 +116,7 @@ class RedditViz(object):
             self.api.get_submission(submission_id=id).upvote()
         except:
             result = False
+        cherrypy.response.headers['Content-Type'] = 'application/json'
         return json.dumps({'result':result})
 
     @cherrypy.expose
@@ -122,6 +126,7 @@ class RedditViz(object):
             self.api.get_submission(submission_id=id).downvote()
         except:
             result = False
+        cherrypy.response.headers['Content-Type'] = 'application/json'
         return json.dumps({'result':result}) 
     
     @cherrypy.expose
@@ -131,7 +136,13 @@ class RedditViz(object):
             self.api.get_submission(submission_id=id).clear_vote()
         except:
             result = False
-        return json.dumps({'result':result})  
+        cherrypy.response.headers['Content-Type'] = 'application/json'
+        return json.dumps({'result':result})
+    
+    @cherrypy.expose
+    def subreddit_search(self, query):
+        cherrypy.response.headers['Content-Type'] = 'application/json'
+        return json.dumps(map(reddit.objects.Subreddit._get_json_dict, self.api.search_reddit_names('NS')))  
     
 # Server configuration
 SCRIPTS_DIR = os.path.join(os.path.abspath("."), u"scripts")
