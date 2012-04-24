@@ -73,7 +73,66 @@ class RedditViz(object):
         comments = submission.all_comments
         cherrypy.response.headers['Content-Type'] = 'application/json'
         return json.dumps(map(self.jsonify_comment, comments[0:int(num)]))
+    
+    #EX: http://localhost:5050/hot?subreddit=uiuc&num=5
+    @cherrypy.expose
+    def hot(self, subreddit, num=10):
+        submissions = list(self.api.get_subreddit(subreddit).get_hot(int(num)))
+        submissions_json = map(self.jsonify_submission, submissions)
+        cherrypy.response.headers['Content-Type'] = 'application/json'
+        return json.dumps(submissions_json)
+    
+    #EX: http://localhost:5050/top?subreddit=uiuc&num=5
+    @cherrypy.expose
+    def top(self, subreddit, num=10):
+        submissions = list(self.api.get_subreddit(subreddit).get_top(int(num)))
+        submissions_json = map(self.jsonify_submission, submissions)
+        cherrypy.response.headers['Content-Type'] = 'application/json'
+        return json.dumps(submissions_json)
+    
+    #EX: http://localhost:5050/subreddit?subreddit=uiuc
+    @cherrypy.expose
+    def subreddit(self, subreddit):
+        cherrypy.response.headers['Content-Type'] = 'application/json'
+        return json.dumps(self.api.get_subreddit(subreddit)._get_json_dict())
+    
+    #EX: http://localhost:5050/login?username=cemeyer2&password=notMyRealPassword
+    @cherrypy.expose
+    def login(self, username, password):
+        result = True
+        try:
+            self.api.login(username, password)
+        except:
+            result = False
+        return json.dumps({'result':result})
+    
+    @cherrypy.expose
+    def upvote_submission(self, id):
+        result = True
+        try:
+            self.api.get_submission(submission_id=id).upvote()
+        except:
+            result = False
+        return json.dumps({'result':result})
 
+    @cherrypy.expose
+    def downvote_submission(self, id):
+        result = True
+        try:
+            self.api.get_submission(submission_id=id).downvote()
+        except:
+            result = False
+        return json.dumps({'result':result}) 
+    
+    @cherrypy.expose
+    def clear_vote_submission(self, id):
+        result = True
+        try:
+            self.api.get_submission(submission_id=id).clear_vote()
+        except:
+            result = False
+        return json.dumps({'result':result})  
+    
 # Server configuration
 SCRIPTS_DIR = os.path.join(os.path.abspath("."), u"scripts")
 STYLE_DIR = os.path.join(os.path.abspath("."), u"css")
