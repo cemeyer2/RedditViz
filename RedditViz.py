@@ -100,7 +100,7 @@ class RedditViz(object):
     
     #EX: http://localhost:5050/login?username=cemeyer2&password=notMyRealPassword
     @cherrypy.expose
-    def login(self, username, password):
+    def login(self, username=None, password=None):
         result = True
         try:
             self.api.login(username, password)

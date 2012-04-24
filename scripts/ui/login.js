@@ -53,10 +53,10 @@ function hideLoginPopup() {
 /**
  * Perform effects to begin login process
  */
-function reportLoginStart(netId) {
+function reportLoginStart(username) {
     $("#loginErrorBox").hide();
     $("#loginButton").attr("disabled", "disabled");
-    $("#loginStatus").html("Logging in as '" + netId + "'");
+    $("#loginStatus").html("Logging in as '" + username + "'");
     $("#loginStatusBox").fadeIn("fast");
 }
 
