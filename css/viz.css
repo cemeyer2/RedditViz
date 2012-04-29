@@ -1,0 +1,251 @@
+/**
+ * Main Page styling
+ */
+
+body {
+    margin: 0;
+    background: url(/images/img01.gif) repeat-x left top;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #444;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-weight: normal;
+    color: #444;
+}
+
+h1, h2 {
+    font-size: 2em;
+}
+
+h3 {
+    font-size: 1.6em;
+}
+
+p, ul, ol {
+    margin-top: 0;
+    line-height: 180%;
+}
+
+a {
+    text-decoration: none;
+    border-bottom: 1px dotted #CC0001;
+    color: #FB7600;
+}
+
+a:hover {
+    background: none;
+}
+
+#wrapper {
+    min-height: 800px;
+    width: 90%;
+    margin: 0 auto;
+    background: white;
+    border-right: black 1px solid;
+    border-left: black 1px solid;
+}
+
+#header {
+    width: 90%;
+    height: 105px;
+    margin: 0 auto;
+    background: white;
+    border-right: black 1px solid;
+    border-left: black 1px solid;
+}
+
+#logo {
+    width: 640px;
+    color: #000;
+}
+
+#logo h1 {
+    float: left;
+    padding: 30px 0 0 20px;
+    margin-right: 10px;
+    letter-spacing: -1px;
+    text-transform: lowercase;
+    font-size: 2.8em;
+}
+
+#logo h1 a {
+    color: #FF7900;
+}
+
+#logo p {
+    float: left;
+    margin: 44px 0 0 0;
+    padding: 3px 10px 3px 0;
+    font: normal 13px Georgia, "Times New Roman", Times, serif;
+    font-style: italic;
+}
+
+#logo a {
+    border: none;
+    background: none;
+    text-decoration: none;
+    color: #000;
+}
+
+
+#menu {
+    width: 90%;
+    height: 44px;
+    background: url(/images/img03.jpg) repeat-x left top;
+    margin: 0 auto;
+    padding-left: 1px;
+    border-right: black 1px solid;
+    border-left: black 1px solid;
+}
+
+#menu ul {
+    margin: 0;
+    padding: 13px 0 0 20px;
+    list-style: none;
+    line-height: normal;
+}
+
+#menu li {
+    float: left;
+}
+
+#menu a {
+    display: block;
+    margin-right: 3px;
+    padding: 5px 20px 7px 20px;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    color: #FFF;
+    border: none;
+}
+
+#menu a:hover {
+    background: #FF7900;
+    text-decoration: none;
+}
+
+#menu .first {
+    margin-right: 3px;
+    background: #FF7900;
+}
+
+#page {
+    margin: 0 auto;
+}
+
+#content {
+    width: 100%;
+    display: none;
+    text-align: center;
+}
+
+.post {
+    margin-left: 20px;
+    padding-bottom: 20px;
+}
+
+.post .title {
+    padding-left: 10px;
+    border-left: 4px solid #F57601;
+    color: #000;
+}
+
+.post .title a {
+    background: none;
+    color: #444;
+    border: none;
+}
+
+.post .title a:hover {
+    text-decoration: underline;
+}
+
+.post .meta {
+    background: #E0E0E0;
+    border-left: 4px double #F57601;
+    border-right: 4px double #F57601;
+    padding: 3px 10px 3px 10px;
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+}
+
+.post .entry {
+    padding: 10px 20px 20px 20px;
+    text-align: justify;
+}
+
+/**
+ * Footer
+ */
+
+#footer {
+    width: 90%;
+    height: 125px;
+    margin: auto;
+    padding: 20px 0 20px 0;
+    background: #444;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #FFF;
+    border-right: black 1px solid;
+    border-left: black 1px solid;
+}
+
+#footer p {
+    margin: 0;
+    line-height: normal;
+    font-size: 9px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+#footer a {
+    color: #FFF;
+    border-bottom: 1px #FFF dotted;
+}
+
+/**
+ * Sidebar styling
+ */
+
+#right-sidebar {
+    float: right;
+    width: 15%;
+    padding: 20px;
+    border-left: #444 1px solid;
+    display: none;
+}
+
+#left-sidebar  {
+    float: left;
+    width: 15%;
+    padding: 20px;
+    border-right: #444 1px solid;
+    display: none;
+}
+
+#left-sidebar h2, #right-sidebar {
+    letter-spacing: -.5px;
+    color: #444;
+}
+
+#left-sidebar p, #right-sidebar p {
+    padding-bottom: 20px;
+    text-align: justify;
+}
+
+#left-sidebar a, #right-sidebar a {
+    color: #000;
+    border: none;
+}
+
+#left-sidebar a:hover, #right-sidebar a:hover {
+    text-decoration: underline;
+    color: #787878;
+}
