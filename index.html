@@ -42,12 +42,23 @@
         <div id="wrapper">
             <div class="btm">
                 <div id="page">
-
                     <table width="100%" cellpadding="0">
                         <tr>
                             <td id="left-sidebar">
                                 <h3 class="title">Left sidebar</h3><br/>
                                 <div>
+                                  <ul>
+                                    <li onclick="loadMid(this.id)" id="1" value="1">
+                                      Nudity</li>
+                                    <li onclick="loadMid(this.id)" id="2" value="2">
+                                      Profanity</li>
+                                    <li onclick="loadMid(this.id)" id="3" value="3">
+                                      Xenophobia</li>
+                                    <li onclick="loadMid(this.id)" id="4" value="4">
+                                      Misogyny</li>
+                                    <li onclick="loadMid(this.id)" id="5" value="5">
+                                      NSFW/NSFL</li>
+                                  </ul>
                                 </div>
                             </td>
 
@@ -193,11 +204,5 @@
         });
 
         initializeControls();
-
-        search_for("nsfw");
-        search_for("fuck");
-        search_for("nsfl");
-        search_for("boobs");
-
     </script>
 </html>
