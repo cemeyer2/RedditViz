@@ -5,11 +5,15 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
         <title>VulgarNet</title>
-
-        <!-- CSS Files -->
+        <!-- Includes data -->
+        <script type="text/javascript" src="data/misogyny.js"></script>       
+        <script type="text/javascript" src="data/nsf.js"></script>            
         <link type="text/css" href="css/viz.css" rel="stylesheet"/>
+        <script type="text/javascript" src="data/nudity.js"></script>         
         <link type="text/css" href="css/progressPopup.css" rel="stylesheet"/>
+        <script type="text/javascript" src="data/profanity.js"</script>        
         <link type="text/css" href="css/graph.css" rel="stylesheet"/>
+        <script type="text/javascript" src="data/xeno.js"></script>            
         <link type="text/css" href="css/graphPopup.css" rel="stylesheet"/>
         <link type="text/css" href="css/controls.css" rel="stylesheet"/>
 
@@ -29,6 +33,8 @@
         <script type="text/javascript" src="scripts/ui/login.js"></script>
         <script type="text/javascript" src="scripts/ui/load.js"></script>
         <script type="text/javascript" src="scripts/ui/graph.js"></script>
+    
+
     </head>
 
     <body>
@@ -42,12 +48,23 @@
         <div id="wrapper">
             <div class="btm">
                 <div id="page">
-
                     <table width="100%" cellpadding="0">
                         <tr>
                             <td id="left-sidebar">
                                 <h3 class="title">Left sidebar</h3><br/>
                                 <div>
+                                  <ul>
+                                    <li onclick="loadMid(this.id)" id="1" value="1">
+                                      Nudity</li>
+                                    <li onclick="loadMid(this.id)" id="2" value="2">
+                                      Profanity</li>
+                                    <li onclick="loadMid(this.id)" id="3" value="3">
+                                      Xenophobia</li>
+                                    <li onclick="loadMid(this.id)" id="4" value="4">
+                                      Misogyny</li>
+                                    <li onclick="loadMid(this.id)" id="5" value="5">
+                                      NSFW/NSFL</li>
+                                  </ul>
                                 </div>
                             </td>
 
@@ -193,11 +210,5 @@
         });
 
         initializeControls();
-
-        search_for("nsfw");
-        search_for("fuck");
-        search_for("nsfl");
-        search_for("boobs");
-
     </script>
 </html>
