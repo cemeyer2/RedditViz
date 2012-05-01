@@ -272,10 +272,9 @@
             .append("g")
               .attr("transform", "translate(2, 2)");
 
-        vis.data(allthedata)
-//         , function(json) { 
-//           var node = vis.data([json]).selectAll("g.node")
-//               .data(pack.nodes)
+        d3.json("scripts/allthedata.json"), function(json) { 
+           var node = vis.data([json]).selectAll("g.node")
+               .data(pack.nodes)
             .enter().append("g")
               .attr("class", function(d) { 
                 return d.children ? "node" : "leaf node"; 
@@ -284,19 +283,18 @@
                 return "translate(" + d.x + "," + d.y + ")"; 
               });
 
-          // node.append("title")
-          //     .text(function(d) {
-          //       return d.title + (d.children ? "" : ": " + format(d.size));
-          //     });
+           node.append("title")
+               .text(function(d) {
+                 return d.title + (d.children ? "" : ": " + format(d.size));
+               });
 
-          // node.append("circle")
-          //     .attr("r", function(d) { return d.ups; });
+           node.append("circle")
+               .attr("r", function(d) { return d.ups; });
 
-          // node.filter(function(d) { return !d.children; }).append("text")
-          //     .attr("text-anchor", "middle")
-          //     .attr("dy", ".3em")
-          //     .text(function(d) { return d.title; });
-         //  });
-       ;
+           node.filter(function(d) { return !d.children; }).append("text")
+               .attr("text-anchor", "middle")
+               .attr("dy", ".3em")
+               .text(function(d) { return d.title; });
+          });
     </script>
 </html>
