@@ -272,7 +272,7 @@
             .append("g")
               .attr("transform", "translate(2, 2)");
 
-        d3.json("scripts/allthedata.json"), function(json) { 
+        d3.json("scripts/allofthedata.json", function(json) { 
            var node = vis.data([json]).selectAll("g.node")
                .data(pack.nodes)
             .enter().append("g")
