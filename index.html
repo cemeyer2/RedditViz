@@ -74,7 +74,7 @@
                                 </div>
                             </td>
 
-                            <td id="right-sidebar">
+                            <td id="right-sidebar" style="display: none">
                                 <h3 class="title">Controls</h3><br/>
                                 <form id="subredditForm">
 		                                Subreddit:<br/>
@@ -218,7 +218,9 @@
         initializeControls();
 
         // spawn the graph
-        var width = 960, height = 960, format = d3.format(",d");
+        var width = 960, 
+            height = 960, 
+            format = d3.format(",d");
 
         var pack = d3.layout.pack()
               .size([width-4, height-4])
@@ -248,12 +250,12 @@
                });
 
            node.append("circle")
-               .attr("r", function(d) { if(d.size) return 10; });
+               .attr("r", function(d) { return d.r; });
 
            node.filter(function(d) { return !d.children; }).append("text")
                .attr("text-anchor", "middle")
                .attr("dy", ".3em")
-               .text(function(d) { return d.title; });
+               .text(function(d) { return d.title.substring(0, d.r /3); });
           });
     </script>
 </html>

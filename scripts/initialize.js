@@ -59,10 +59,10 @@ function submitLogin() {
 function loadSidebar() {
 
     // Dynamically set the width of the sidebars
-    $("#left-sidebar, #right-sidebar").height($("#wrapper").height()-35);
-    $("#left-sidebar, #right-sidebar").width(0);
-    $("#left-sidebar, #right-sidebar, #content").show();
-    $("#left-sidebar, #right-sidebar").animate({
+    $("#left-sidebar").height($("#wrapper").height()-35);
+    $("#left-sidebar").width(0);
+    $("#left-sidebar, #content").show();
+    $("#left-sidebar").animate({
             width: $("#page").width()*0.15
         },
         "slow"
