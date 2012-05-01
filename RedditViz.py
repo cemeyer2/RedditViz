@@ -73,25 +73,26 @@ class RedditViz(object):
     
     @cherrypy.expose
     def json(self):
-        r = {}
-        r['nudity'] = {'title': 'nudity'}
-        r['nudity']['boobies'] = {'title': 'boobies', 'children': self.search("boobies")}
-        r['nudity']['dick'] = {'title': 'dick', 'children': self.search("dick")}
-        r['nudity']['pussy'] = {'title': 'pussy', 'children': self.search("pussy")}
-        r['profanity'] = {'title':'profanity'}
-        r['profanity']['shit'] = {'title': 'shit', 'children': self.search("shit")}
-        r['profanity']['fuck'] = {'title': 'fuck', 'children': self.search("fuck")}
-        r['profanity']['ass'] = {'title': 'ass', 'children': self.search("ass")}   
-        r['xenophobia'] = {'title': 'xenophobia'}
-        r['xenophobia']['nigger'] = {'title': 'nigger', 'children': self.search("nigger")}
-        r['xenophobia']['faggot'] = {'title': 'faggot', 'children': self.search("faggot")}  
-        r['misogyny'] = {'title': 'misogyny'}
-        r['misogyny']['cunt'] = {'title': 'cunt', 'children': self.search("cunt")}
-        r['misogyny']['slut'] = {'title': 'slut', 'children': self.search("slut")}
-        r['misogyny']['bitch'] = {'title': 'bitch', 'children': self.search("bitch")}    
-        r['nsf'] = {'title': 'not safe for'}
-        r['nsf']['nsfw'] = {'title': 'nsfw', 'children': self.search("NSFW")}
-        r['nsf']['nsfl'] = {'title': 'nsfl', 'children': self.search("NSFL")} 
+        data = {}
+        data['nudity'] = {'title': 'nudity'}
+        data['nudity']['boobies'] = {'title': 'boobies', 'children': self.search("boobies")}
+        data['nudity']['dick'] = {'title': 'dick', 'children': self.search("dick")}
+        data['nudity']['pussy'] = {'title': 'pussy', 'children': self.search("pussy")}
+        data['profanity'] = {'title':'profanity'}
+        data['profanity']['shit'] = {'title': 'shit', 'children': self.search("shit")}
+        data['profanity']['fuck'] = {'title': 'fuck', 'children': self.search("fuck")}
+        data['profanity']['ass'] = {'title': 'ass', 'children': self.search("ass")}   
+        data['xenophobia'] = {'title': 'xenophobia'}
+        data['xenophobia']['nigger'] = {'title': 'nigger', 'children': self.search("nigger")}
+        data['xenophobia']['faggot'] = {'title': 'faggot', 'children': self.search("faggot")}  
+        data['misogyny'] = {'title': 'misogyny'}
+        data['misogyny']['cunt'] = {'title': 'cunt', 'children': self.search("cunt")}
+        data['misogyny']['slut'] = {'title': 'slut', 'children': self.search("slut")}
+        data['misogyny']['bitch'] = {'title': 'bitch', 'children': self.search("bitch")}    
+        data['nsf'] = {'title': 'not safe for'}
+        data['nsf']['nsfw'] = {'title': 'nsfw', 'children': self.search("NSFW")}
+        data['nsf']['nsfl'] = {'title': 'nsfl', 'children': self.search("NSFL")} 
+        r = {'title':'reddit data', 'children': data}
         self.writetofile(json.dumps(r))
         return "done"
         
