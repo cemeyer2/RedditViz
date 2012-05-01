@@ -11,7 +11,7 @@
         <link type="text/css" href="css/viz.css" rel="stylesheet"/>
         <script type="text/javascript" src="data/nudity.js"></script>         
         <link type="text/css" href="css/progressPopup.css" rel="stylesheet"/>
-        <script type="text/javascript" src="data/profanity.js"</script>        
+        <script type="text/javascript" src="data/profanity.js"></script>        
         <link type="text/css" href="css/graph.css" rel="stylesheet"/>
         <script type="text/javascript" src="data/xeno.js"></script>            
         <link type="text/css" href="css/graphPopup.css" rel="stylesheet"/>
@@ -200,6 +200,8 @@
 
     </body>
     <script>
+        var presentation = true;
+        var allthedata;
         showLoginPopup();
 
         // Submit the login form on enter key pressed
@@ -210,5 +212,91 @@
         });
 
         initializeControls();
+
+        allthedata = {
+          nudity: {
+            title: "nudity", 
+            children: [ 
+              {title: "boobies", children: nudity_boobies}, 
+              {title: "dick", children: nudity_dick},
+              {title: "pussy", children: nudity_pussy}
+            ]
+          },
+          profanity: {
+            title: "profanity",
+            children: [
+              {title: "fuck", children: profanity_fuck},
+              {title: "shit", children: profanity_shit},
+              {title: "ass",  children: profanity_ass}
+            ]
+          },
+          xenophobia: {
+            title: "xenophobia",
+            children: [
+              {title: "faggot", children: xeno_faggot},
+              {title: "nigger", children: xeno_nigger}
+            ]
+          },
+          misogyny: { 
+            title: "misogyny",
+            children: [
+              {title: "cunt", children: misogyny_cunt},
+              {title: "slut", children: misogyny_slut},
+              {title: "bitch", children: misogyny_bitch}
+            ]
+          },
+          nsf: {
+            title: "nsf",
+            children: [
+              {title: "nsfw", children: nsf_nsfw},
+              {title: "nsfl", children: nsf_nsfl}
+            ]
+          }
+        };
+
+        console.log(allthedata);
+
+
+        var width = 960, height = 960, format = d3.format(",d");
+
+        var pack = d3.layout.pack()
+              .size([width-4, height-4])
+              .value(function(d) { return d.size; });
+
+        console.log(pack);
+
+        var vis = d3.select("#content").append("svg")
+              .attr("width", width)
+              .attr("height", height)
+              .attr("class", "pack")
+            .append("g")
+              .attr("transform", "translate(2, 2)");
+
+        vis.data(allthedata)
+//         , function(json) { 
+//           var node = vis.data([json]).selectAll("g.node")
+//               .data(pack.nodes)
+            .enter().append("g")
+              .attr("class", function(d) { 
+                return d.children ? "node" : "leaf node"; 
+              })
+              .attr("transform", function(d) { 
+                return "translate(" + d.x + "," + d.y + ")"; 
+              });
+
+          // node.append("title")
+          //     .text(function(d) {
+          //       return d.title + (d.children ? "" : ": " + format(d.size));
+          //     });
+
+          // node.append("circle")
+          //     .attr("r", function(d) { return d.ups; });
+
+          // node.filter(function(d) { return !d.children; }).append("text")
+          //     .attr("text-anchor", "middle")
+          //     .attr("dy", ".3em")
+          //     .text(function(d) { return d.title; });
+         //  });
+       ;
     </script>
 </html>
