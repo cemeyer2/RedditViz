@@ -25,33 +25,61 @@ function search_for(querystring) {
 function loadMid(id) {
   var querystring = "";
 
-  switch(id) { 
+  var presentation = true;
 
-    // nudity
-    case '1':
-      // querystring = "boobies|penis|boobs|dick|vagina|twat|tit|porn|nude|naked|pussy|boner";
-      querystring = "pussy";
-      break;
+  if(presentation) { 
+    switch(id) { 
 
-    // profanity
-    case '2':
-      querystring = "fuck|ass|shit|bitch";
-      break;
+      // nudity
+      case '1':
+        break;
 
-    // xenophobia
-    case '3':
-      querystring = "fag|nigger|chink|beaner|gay|homo|xenophobia|terrorist|jap";
-      break;
+      // profanity
+      case '2':
+        break;
 
-    // misogyny
-    case '4':
-      querystring = "bitch\|cunt\|ho\|slut\|skank\|misogyny";
-      break;
+      // xenophobia
+      case '3':
+        break;
 
-    // nsfw & nsfwl
-    case '5':
-      querystring = "nsfw | nsfl";
-      break;
+      // misogyny
+      case '4':
+        break;
+
+
+      // nsfw & nsfl
+      case '5':
+        break;
+    }
+  }
+  else { 
+    switch(id) { 
+
+      // nudity
+      case '1':
+        querystring = "boobies|penis|boobs|dick|vagina|twat|tit|porn|nude|naked|pussy|boner";
+        break;
+
+      // profanity
+      case '2':
+        querystring = "fuck|ass|shit|bitch";
+        break;
+
+      // xenophobia
+      case '3':
+        querystring = "fag|nigger|chink|beaner|gay|homo|xenophobia|terrorist|jap";
+        break;
+
+      // misogyny
+      case '4':
+        querystring = "bitch\|cunt\|ho\|slut\|skank\|misogyny";
+        break;
+
+      // nsfw & nsfwl
+      case '5':
+        querystring = "nsfw | nsfl";
+        break;
+    }
   }
 
   var SEARCH_URL = "/search";

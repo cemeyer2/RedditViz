@@ -68,14 +68,14 @@ class RedditViz(object):
         submissions = list(self.api.search(query, subreddit, sort, int(limit)))
         submissions_json = map(self.jsonify_submission, submissions)
         cherrypy.response.headers['Content-Type'] = 'application/json'
-        self.writetofile(json.dumps(submissions_json), query)
+        # self.writetofile(json.dumps(submissions_json), query)
         return json.dumps(submissions_json)
     
     # this writes to a file. 
-    def writetofile(self, data, searchterm):
-        fp = open("nudity.js", "a+")
-        fp.write("var nudity_" + searchterm + " = " + data + ";\n")
-        fp.close()
+    # def writetofile(self, data, searchterm):
+    #     fp = open("nsf.js", "a+")
+    #     fp.write("var nsf_" + searchterm + " = " + data + ";\n")
+    #     fp.close()
 
     #EX: http://localhost:5050/comments?num=2&submission_id=gws7c 
     @cherrypy.expose
