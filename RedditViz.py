@@ -68,37 +68,41 @@ class RedditViz(object):
         submissions = list(self.api.search(query, subreddit, sort, int(limit)))
         submissions_json = map(self.jsonify_submission, submissions)
         cherrypy.response.headers['Content-Type'] = 'application/json'
-        # self.writetofile(json.dumps(submissions_json), query)
+        self.writetofile(json.dumps(submissions_json), query)
         return json.dumps(submissions_json)
+
+    def json_search(self, query=None, subreddit=None, sort=None, limit=10):
+        submissions = list(self.api.search(query, subreddit, sort, int(limit)))
+        return map(self.jsonify_submission, submissions)
     
     @cherrypy.expose
     def json(self):
         nudity_children = []
-        nudity_children.append({'title': 'boobies', 'children': self.search("boobies")})
-        nudity_children.append({'title': 'dick', 'children': self.search("dick")})
-        nudity_children.append({'title': 'pussy', 'children': self.search("pussy")})
+        nudity_children.append({'title': 'boobies', 'children': self.json_search("boobies")})
+        nudity_children.append({'title': 'dick', 'children': self.json_search("dick")})
+        nudity_children.append({'title': 'pussy', 'children': self.json_search("pussy")})
         nudity = {'title': 'nudity', 'children': nudity_children}
        
         profanity_children = []
-        profanity_children.append({'title': 'shit', 'children': self.search("shit")})
-        profanity_children.append({'title': 'fuck', 'children': self.search("fuck")})
-        profanity_children.append({'title': 'ass', 'children': self.search("ass")})
+        profanity_children.append({'title': 'shit', 'children': self.json_search("shit")})
+        profanity_children.append({'title': 'fuck', 'children': self.json_search("fuck")})
+        profanity_children.append({'title': 'ass', 'children': self.json_search("ass")})
         profanity = {'title': 'profanity', 'children' : profanity_children}
 
         xenophobia_children = []
-        xenophobia_children.append({'title': 'nigger', 'children': self.search("nigger")})
-        xenophobia_children.append({'title': 'faggot', 'children': self.search("faggot")})
+        xenophobia_children.append({'title': 'nigger', 'children': self.json_search("nigger")})
+        xenophobia_children.append({'title': 'faggot', 'children': self.json_search("faggot")})
         xenophobia = {'title': 'xenophobia', 'children': xenophobia_children}
        
         misogyny_children = []
-        misogyny_children.append({'title': 'cunt', 'children': self.search("cunt")})
-        misogyny_children.append({'title': 'slut', 'children': self.search("slut")})
-        misogyny_children.append({'title': 'bitch', 'children': self.search("bitch")})    
+        misogyny_children.append({'title': 'cunt', 'children': self.json_search("cunt")})
+        misogyny_children.append({'title': 'slut', 'children': self.json_search("slut")})
+        misogyny_children.append({'title': 'bitch', 'children': self.json_search("bitch")})    
         misogyny = {'title': 'misogyny', 'children' : misogyny_children}
 
         nsf_children = []
-        nsf_children.append({'title': 'nsfw', 'children': self.search("NSFW")})
-        nsf_children.append({'title': 'nsfl', 'children': self.search("NSFL")}) 
+        nsf_children.append({'title': 'nsfw', 'children': self.json_search("NSFW")})
+        nsf_children.append({'title': 'nsfl', 'children': self.json_search("NSFL")}) 
         nsf = {'title': 'nsf', 'children' : nsf_children};
 
         data = []
