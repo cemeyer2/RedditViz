@@ -51,9 +51,9 @@
                     <table width="100%" cellpadding="0">
                         <tr>
                             <td id="left-sidebar">
-                                <h3 class="title">Left sidebar</h3><br/>
+                                <h3 class="title">Load Fresh Data</h3><br/>
                                 <div>
-                                  <ul>
+                                  <ul style="list-style-type: none">
                                     <li onclick="loadMid(this.id)" id="1" value="1">
                                       Nudity</li>
                                     <li onclick="loadMid(this.id)" id="2" value="2">
@@ -196,12 +196,6 @@
                 </tr>
             </table>
         </div>
-
-        <!-- The CoMoTo Footer -->
-        <div id="footer">
-            
-        </div>
-
     </body>
     <script>
         var presentation = true;
@@ -246,7 +240,6 @@
               .on("click", function(d) {
                 window.open(d.permalink, '_blank');
               });
-
 
            node.append("title")
                .text(function(d) {

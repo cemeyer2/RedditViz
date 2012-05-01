@@ -31,35 +31,22 @@ function loadMid(id) {
     switch(id) { 
       // nudity
       case '1':
-        console.log(nudity_boobies);
-        console.log(nudity_dick);
-        console.log(nudity_pussy);
         break;
 
       // profanity
       case '2':
-        console.log(profanity_fuck);
-        console.log(profanity_shit);
-        console.log(profanity_ass);
         break;
 
       // xenophobia
       case '3':
-        console.log(xeno_faggot);
-        console.log(xeno_nigger);
         break;
 
       // misogyny
       case '4':
-        console.log(misogyny_cunt);
-        console.log(misogyny_slut);
-        console.log(misogyny_bitch);
         break;
 
       // nsfw & nsfl
       case '5':
-        console.log(nsf_nsfw);
-        console.log(nsf_nsfl);
         break;
     }
   }
