@@ -140,6 +140,9 @@ function renderGraph(data) {
         })
         .attr("r", 5)
         .style("fill", function (d) {
+        	if(console){
+        		console.log(d);
+        	}
             groupIds[d.group] = true;
             return fillNode(d.group);
         })
