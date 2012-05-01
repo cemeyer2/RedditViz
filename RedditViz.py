@@ -21,7 +21,10 @@ class RedditViz(object):
     def jsonify_comment(self, comment):
         time.sleep(2)
         d = {}
-        d['author'] = comment.author._get_json_dict()
+        try:
+          d['author'] = comment.author._get_json_dict()
+        except:
+          d['author'] = {}
         d['body'] = comment.body
         d['body_html'] = comment.body_html
         d['created'] = comment.created
@@ -37,7 +40,10 @@ class RedditViz(object):
     def jsonify_submission(self, submission):
         time.sleep(2)
         d = {}
-        d['author'] = submission.author._get_json_dict()
+        try:
+          d['author'] = submission.author._get_json_dict()
+        except:
+          d['author'] = {}
         d['created'] = submission.created
         d['created_utc'] = submission.created_utc
         d['downs'] = submission.downs
@@ -62,8 +68,15 @@ class RedditViz(object):
         submissions = list(self.api.search(query, subreddit, sort, int(limit)))
         submissions_json = map(self.jsonify_submission, submissions)
         cherrypy.response.headers['Content-Type'] = 'application/json'
+        # self.writetofile(json.dumps(submissions_json), query)
         return json.dumps(submissions_json)
     
+    # this writes to a file. 
+    # def writetofile(self, data, searchterm):
+    #     fp = open("nsf.js", "a+")
+    #     fp.write("var nsf_" + searchterm + " = " + data + ";\n")
+    #     fp.close()
+
     #EX: http://localhost:5050/comments?num=2&submission_id=gws7c 
     @cherrypy.expose
     def comments(self, url=None, submission_id=None, num=5):
@@ -170,6 +183,7 @@ class RedditViz(object):
 SCRIPTS_DIR = os.path.join(os.path.abspath("."), u"scripts")
 STYLE_DIR = os.path.join(os.path.abspath("."), u"css")
 IMAGES_DIR = os.path.join(os.path.abspath("."), u"images")
+DATA_DIR = os.path.join(os.path.abspath("."), u"data")
 config = {'/scripts':
                   {
                   'tools.staticdir.on': True,
@@ -184,6 +198,11 @@ config = {'/scripts':
                   {
                   'tools.staticdir.on': True,
                   'tools.staticdir.dir': IMAGES_DIR,
+                  },
+          '/data':
+                  {
+                  'tools.staticdir.on': True,
+                  'tools.staticdir.dir': DATA_DIR,
                   }
 }
 cherrypy.config.update({
