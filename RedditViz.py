@@ -183,6 +183,7 @@ class RedditViz(object):
 SCRIPTS_DIR = os.path.join(os.path.abspath("."), u"scripts")
 STYLE_DIR = os.path.join(os.path.abspath("."), u"css")
 IMAGES_DIR = os.path.join(os.path.abspath("."), u"images")
+DATA_DIR = os.path.join(os.path.abspath("."), u"data")
 config = {'/scripts':
                   {
                   'tools.staticdir.on': True,
@@ -197,6 +198,11 @@ config = {'/scripts':
                   {
                   'tools.staticdir.on': True,
                   'tools.staticdir.dir': IMAGES_DIR,
+                  },
+          '/data':
+                  {
+                  'tools.staticdir.on': True,
+                  'tools.staticdir.dir': DATA_DIR,
                   }
 }
 cherrypy.config.update({
