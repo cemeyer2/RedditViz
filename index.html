@@ -70,7 +70,7 @@
 
                             <td>
                                 <div id="content">
-                                    <div class='gallery' id='chart' oncontextmenu="return false;"></div>
+                                    <div class='gallery' id='chart'></div>
                                 </div>
                             </td>
 
@@ -248,7 +248,7 @@
                });
 
            node.append("circle")
-               .attr("r", function(d) { return d.ups; });
+               .attr("r", function(d) { if(d.size) return 10; });
 
            node.filter(function(d) { return !d.children; }).append("text")
                .attr("text-anchor", "middle")
