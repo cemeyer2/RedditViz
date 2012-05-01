@@ -74,25 +74,26 @@ class RedditViz(object):
     @cherrypy.expose
     def json(self):
         r = {}
-        r['nudity'] = {}
+        r['nudity'] = {'title': 'nudity'}
         r['nudity']['boobies'] = {'title': 'boobies', 'children': self.search("boobies")}
         r['nudity']['dick'] = {'title': 'dick', 'children': self.search("dick")}
         r['nudity']['pussy'] = {'title': 'pussy', 'children': self.search("pussy")}
-        r['profanity'] = {}
+        r['profanity'] = {'title':'profanity'}
         r['profanity']['shit'] = {'title': 'shit', 'children': self.search("shit")}
         r['profanity']['fuck'] = {'title': 'fuck', 'children': self.search("fuck")}
         r['profanity']['ass'] = {'title': 'ass', 'children': self.search("ass")}   
-        r['xenophobia'] = {}
+        r['xenophobia'] = {'title': 'xenophobia'}
         r['xenophobia']['nigger'] = {'title': 'nigger', 'children': self.search("nigger")}
         r['xenophobia']['faggot'] = {'title': 'faggot', 'children': self.search("faggot")}  
-        r['misogyny'] = {}
+        r['misogyny'] = {'title': 'misogyny'}
         r['misogyny']['cunt'] = {'title': 'cunt', 'children': self.search("cunt")}
         r['misogyny']['slut'] = {'title': 'slut', 'children': self.search("slut")}
         r['misogyny']['bitch'] = {'title': 'bitch', 'children': self.search("bitch")}    
-        r['nsf'] = {}
+        r['nsf'] = {'title': 'not safe for'}
         r['nsf']['nsfw'] = {'title': 'nsfw', 'children': self.search("NSFW")}
         r['nsf']['nsfl'] = {'title': 'nsfl', 'children': self.search("NSFL")} 
         self.writetofile(json.dumps(r))
+        return "done"
         
     
     #this writes to a file. 
