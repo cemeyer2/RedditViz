@@ -253,6 +253,7 @@ config = {'/scripts':
 }
 cherrypy.config.update({
     'server.socket_port': 5050,
+    'server.socket_host': '0.0.0.0',
 })
 # Start the server
 cherrypy.tree.mount(RedditViz(), '/', config)
